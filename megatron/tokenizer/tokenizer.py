@@ -46,7 +46,7 @@ def build_tokenizer(args):
         tokenizer = HFTokenizer(args.vocab_file)
     elif args.tokenizer_type.lower() == "HFAutoTokenizer".lower():
         assert args.vocab_file is not None
-        tokenizer = HFAutoTokenizer(args.vocab_file)
+        tokenizer = AutoTokenizer.from_pretrained(args.vocab_file)
     elif args.tokenizer_type.lower() == "HFGPT2Tokenizer".lower():
         if args.vocab_file is None:
             print(
