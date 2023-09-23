@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from savanna.utils import is_local_main, print_rank_0
+from megatron.utils import is_local_main, print_rank_0
 import best_download
 
 # patch best_download (eval harness downloader) to only happen on the first local rank
@@ -40,8 +40,8 @@ import torch.nn.functional as F
 
 from lm_eval.models.gpt2 import GPT2LM
 from lm_eval import tasks, evaluator, utils, base
-from savanna.text_generation_utils import generate_samples_from_prompt
-from savanna import mpu
+from megatron.text_generation_utils import generate_samples_from_prompt
+from megatron import mpu
 
 
 class EvalHarnessAdapter(GPT2LM):

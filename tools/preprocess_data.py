@@ -33,8 +33,8 @@ import tqdm
 import torch
 import ftfy
 
-from savanna.tokenizer import build_tokenizer
-from savanna.data import indexed_dataset
+from megatron.tokenizer import build_tokenizer
+from megatron.data import indexed_dataset
 from threading import Semaphore
 
 

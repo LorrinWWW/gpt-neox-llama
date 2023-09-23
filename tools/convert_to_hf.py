@@ -26,7 +26,7 @@ from transformers import GPTNeoXConfig, GPTNeoXForCausalLM
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 )
-from savanna.tokenizer import build_tokenizer
+from megatron.tokenizer import build_tokenizer
 
 
 """

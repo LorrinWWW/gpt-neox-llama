@@ -26,12 +26,12 @@ sys.path.append(
 
 import torch
 
-from savanna import mpu
-from savanna.checkpointing import ensure_directory_exists
-from savanna.checkpointing import get_checkpoint_name
-from savanna.checkpointing import get_checkpoint_tracker_filename
-from savanna.global_vars import rebuild_tokenizer
-from savanna.global_vars import _parse_args
+from megatron import mpu
+from megatron.checkpointing import ensure_directory_exists
+from megatron.checkpointing import get_checkpoint_name
+from megatron.checkpointing import get_checkpoint_tracker_filename
+from megatron.global_vars import rebuild_tokenizer
+from megatron.global_vars import _parse_args
 
 
 def split_into_partitions(tensor, num_partitions, partition_dim, stride):
