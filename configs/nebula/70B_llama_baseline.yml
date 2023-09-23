@@ -1,0 +1,119 @@
+{
+  "pipe_parallel_size": 1,
+  "model_parallel_size": 4,
+  "num_layers": 80,
+  "hidden_size": 8192,
+  "proj_groups": 8,
+  "num_attention_heads": 64,
+  "norm": "flash_rmsnorm",
+  "seq_length": 4096,
+  "max_position_embeddings": 4096,
+  "pos_emb": "rotary",
+  "pre_mlp_norm": true, # be careful that its layer name is different from HF.
+  "rotary_pct": 1.0,
+  "no_weight_tying": true,
+  "gpt_j_residual": false,
+  "output_layer_parallelism": "column",
+  "attention-config": [ 
+    [["flash_v2_llama"], 80],
+  ],
+  
+  "mlp_type": "llama",
+  "activation": "silu",
+
+  "scaled_upper_triang_masked_softmax_fusion": true,
+
+  "init_method": "small_init",
+  "output_layer_init_method": "wang_init",
+
+  # "optimizer": {
+  #   "type": "Adam",
+  #   "params": {
+  #     "lr": 1.0e-5,
+  #     "betas": [0.9, 0.999],
+  #     "eps": 1.0e-6
+  #   }
+  # },
+  # "optimizer": {
+  #   "type": "CPU_Adam",
+  #   "params": {
+  #     "lr": 1.0e-5,
+  #     "betas": [0.9, 0.999],
+  #     "eps": 1.0e-6
+  #   }
+  # },
+  "optimizer": {
+    "type": "SGD",
+    "params": {
+      "lr": 1.0e-5
+    }
+  },  
+  "min_lr": 1.0e-6,
+  "zero_force_ds_cpu_optimizer": false,
+  "zero_allow_untested_optimizer": true,
+
+  # "zero_optimization": {
+  #   "stage": 3,
+  #   "allgather_partitions": true,
+  #   "allgather_bucket_size": 500000000,
+  #   "overlap_comm": true,
+  #   "reduce_scatter": true,
+  #   "reduce_bucket_size": 500000000,
+  #   "contiguous_gradients": true,
+  #   "cpu_offload": false
+  # },
+  
+  "zero_optimization": {
+    "stage": 3,
+    "offload_optimizer": {
+      "device": "cpu",
+      "pin_memory": false
+    },
+    "overlap_comm": true,
+    "contiguous_gradients": false
+  },
+
+  "train_micro_batch_size_per_gpu": 1,
+  "gradient_accumulation_steps": 4,
+  "data_impl": "mmap",
+  "num_workers": 1,
+
+  "checkpoint_activations": true,
+  "checkpoint_num_layers": 1,
+  "partition_activations": false,
+  "synchronize_each_layer": false,
+
+  "gradient_clipping": 1.0,
+  "weight_decay": 0.1,
+  "hidden_dropout": 0.0,
+  "attention_dropout": 0.0,
+
+  "precision": "bfloat16",
+   "bf16": {
+   "enabled": true
+    },
+   
+  "train_iters": 143000,
+  "lr_decay_iters": 143000,
+  "distributed_backend": "nccl",
+  "lr_decay_style": "cosine",
+  "warmup": 0.01,
+  "checkpoint_factor": 100,
+  "eval_interval": 143000,
+  "eval_iters": 10,
+
+  "master_port": 23001,
+  "wandb_group": "test",
+  "override_lr_scheduler": true,
+  "finetune": true,
+  "load": "/mnt/nvme3n1/llama-2-70b-mp4",
+  "save": "/scratch/checkpoints/test",
+
+  "log_interval": 10,
+  "steps_per_print": 10,
+  "wall_clock_breakdown": false,
+  
+  ################# networking
+  # "hostfile": "./hostfile",
+  # "launcher": "pdsh"
+  }

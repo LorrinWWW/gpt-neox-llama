@@ -1,0 +1,19 @@
+{
+  "train-data-paths": [
+    "/home/jue/v4/small_pretrain_data/c4-train-4-1024_text_HFAutoTokenizer_document"
+  ],
+  "train-data-weights": [ 
+   1.
+  ],
+  "valid-data-paths": [
+    "/home/jue/v4/small_pretrain_data/c4-train-4-1024_text_HFAutoTokenizer_document"
+  ],
+  "test-data-paths": [
+    "/home/jue/v4/small_pretrain_data/c4-train-4-1024_text_HFAutoTokenizer_document"
+  ],
+  "tokenizer-type": "HFAutoTokenizer",
+  "vocab-file": "togethercomputer/LLaMA-2-7B-32K",
+  "use_wandb": True,
+  "wandb_host": "https://api.wandb.ai",
+  "wandb_project": "hyena-llama"
+}
